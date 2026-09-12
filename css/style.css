@@ -404,7 +404,7 @@ body.collapsed .term-body { display: none; }
 .dash-section.folders { grid-area: folders; display: flex; flex-direction: column;  height: 145px;}
 .dash-section.reminders { grid-area: reminders;  height: 145px;}
 .dash-section.calendar { grid-area: calendar;  height: 250px;}
-.dash-section.notes { grid-area: notes;  height: 200px;}
+.dash-section.notes { grid-area: notes;  height: 250px;}
 
 .dash-head {
   color: var(--gold);
