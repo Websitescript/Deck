@@ -83,13 +83,13 @@ function dashFolderCard(f) {
   return (
     `<div class="folder-card">` +
     `<div class="folder-head">` +
-    `<button class="icon-btn caret" data-toggle-folder-collapse="${f.id}" title="Expand / collapse">▾</button>` +
+    `<button class="icon-btn caret collapsed" data-toggle-folder-collapse="${f.id}" title="Expand / collapse">▾</button>` +
     `<span class="dash-link" data-open-folder="${escapeAttr(f.name)}">📁 ${escapeHtml(f.name)}</span>` +
     `<span class="dash-count muted">${f.links.length}</span>` +
     `<button class="icon-btn" data-add-folder-link="${f.id}" title="Add link">+</button>` +
     `<button class="icon-btn" data-edit-folder="${f.id}" title="Rename">✎</button>` +
     `<button class="icon-btn danger" data-delete-folder="${f.id}" title="Delete folder">×</button></div>` +
-    `<div class="folder-links" data-folder-links="${f.id}">${rows}</div></div>`
+    `<div class="folder-links collapsed" data-folder-links="${f.id}">${rows}</div></div>`
   );
 }
 
@@ -184,7 +184,7 @@ function openForm(title, fields, onSubmit) {
     .map(
       (f, i) =>
         `<label class="form-field"><span>${escapeHtml(f.label)}</span>` +
-        `<input type="text" data-field="${i}" value="${escapeAttr(f.value || "")}" placeholder="${escapeAttr(f.placeholder || "")}" /></label>`
+        `<input type="${f.type || "text"}" data-field="${i}" value="${escapeAttr(f.value || "")}" placeholder="${escapeAttr(f.placeholder || "")}" /></label>`
     )
     .join("");
 
@@ -302,14 +302,18 @@ function deleteFolderLinkFlow(folder, link) {
 }
 
 function addReminderFlow() {
+  const defaultWhen = new Date(Date.now() + 3600000); // an hour from now — a reasonable starting point
   openForm(
     "Add Reminder",
-    [{ key: "text", label: "Reminder" }, { key: "when", label: "When", placeholder: "tomorrow 9:00, 2026-09-20, in 2 hours" }],
+    [
+      { key: "text", label: "Reminder" },
+      { key: "when", label: "When", type: "datetime-local", value: isoToDatetimeLocal(defaultWhen) },
+    ],
     (v) => {
       if (!v.text || !v.when) return false;
-      const due = parseWhen(v.when);
-      if (!due) {
-        alert(`Couldn't understand "${v.when}". Try: 2026-09-20, 2026-09-20 14:00, today 18:00, tomorrow, or in 2 hours.`);
+      const due = new Date(v.when);
+      if (isNaN(due.getTime())) {
+        alert("Please pick a valid date and time.");
         return false;
       }
       state.data.reminders.push({ id: uid(), text: v.text, dueAt: due.toISOString(), done: false, notified: false });
@@ -324,13 +328,13 @@ function editReminderFlow(reminder) {
     "Edit Reminder",
     [
       { key: "text", label: "Reminder", value: reminder.text },
-      { key: "when", label: "When", value: isoToInputWhen(reminder.dueAt), placeholder: "tomorrow 9:00, 2026-09-20, in 2 hours" },
+      { key: "when", label: "When", type: "datetime-local", value: isoToDatetimeLocal(reminder.dueAt) },
     ],
     (v) => {
       if (!v.text || !v.when) return false;
-      const due = parseWhen(v.when);
-      if (!due) {
-        alert(`Couldn't understand "${v.when}". Try: 2026-09-20, 2026-09-20 14:00, today 18:00, tomorrow, or in 2 hours.`);
+      const due = new Date(v.when);
+      if (isNaN(due.getTime())) {
+        alert("Please pick a valid date and time.");
         return false;
       }
       reminder.text = v.text;

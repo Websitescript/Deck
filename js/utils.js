@@ -157,11 +157,21 @@ function formatDue(dueAt) {
 // Converts a stored ISO dueAt back into a "YYYY-MM-DD HH:MM" string —
 // the one parseWhen() format that round-trips losslessly, so editing a
 // reminder always starts from something parseWhen can read back in,
-// regardless of how the original "when" was phrased.
+// regardless of how the original "when" was phrased. Used by the
+// terminal's /remind-style flows.
 function isoToInputWhen(iso) {
   const d = new Date(iso);
   const pad = (n) => String(n).padStart(2, "0");
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+// Same idea but in the "YYYY-MM-DDTHH:mm" shape an <input type="datetime-local">
+// expects/returns — used by the dashboard's Add/Edit Reminder dialog, which
+// uses the browser's native date+time picker instead of free-text parsing.
+function isoToDatetimeLocal(iso) {
+  const d = new Date(iso);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 // A small, dependency-free status message that appears briefly at the

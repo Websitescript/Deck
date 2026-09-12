@@ -209,8 +209,9 @@ body.collapsed .term-body { display: none; }
 /* ---- search bar: Google / YouTube toggle -------------------------------- */
 
 .dash-search {
-  flex: 1;
+  flex: 0 0 380px;
   min-width: 0;
+  max-width: 45%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -268,6 +269,7 @@ body.collapsed .term-body { display: none; }
 
 .open-term-btn {
   flex-shrink: 0;
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -421,7 +423,7 @@ body.collapsed .term-body { display: none; }
 
 .dash-section.reminders .dash-body,
 .dash-section.notes .dash-body {
-  max-height: 160px;
+  max-height: 280px;
   overflow-y: auto;
 }
 
@@ -441,21 +443,17 @@ body.collapsed .term-body { display: none; }
 }
 
 .link-tile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
+  position: relative;
   padding: 14px 6px;
   background: var(--term-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
-  cursor: pointer;
   text-align: center;
-  transition: border-color 0.15s ease, transform 0.1s ease;
+  transition: border-color 0.15s ease;
 }
 
 .link-tile:hover { border-color: var(--teal); }
-.link-tile:active { transform: scale(0.97); }
+.link-tile:hover .tile-actions { opacity: 1; }
 .link-tile img { width: 26px; height: 26px; border-radius: 6px; }
 
 .link-tile span {
@@ -641,8 +639,6 @@ body.collapsed .term-body { display: none; }
   transition: opacity 0.12s ease;
 }
 
-.link-tile { position: relative; }
-.link-tile:hover .tile-actions { opacity: 1; }
 .tile-actions .icon-btn { background: var(--term-bg); }
 
 .tile-open {
@@ -652,6 +648,8 @@ body.collapsed .term-body { display: none; }
   gap: 7px;
   cursor: pointer;
 }
+
+.tile-open:active { transform: scale(0.97); }
 
 /* ---- add/edit dialog ----------------------------------------------------- */
 
@@ -877,7 +875,7 @@ body.collapsed .term-body { display: none; }
   body.windowed .term-window { height: 92vh; }
   .term-clock { display: none; }
   .dash-header { flex-wrap: wrap; }
-  .dash-search { order: 3; flex-basis: 100%; }
+  .dash-search { order: 3; flex: 0 0 100%; max-width: 100%; }
   .dash-stats { grid-template-columns: repeat(2, 1fr); }
   .dash-grid {
     grid-template-columns: 1fr;
