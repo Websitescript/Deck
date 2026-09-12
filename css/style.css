@@ -399,11 +399,11 @@ body.collapsed .term-body { display: none; }
   min-width: 0;
 }
 
-.dash-section.links { grid-area: links; height: 145px;}
-.dash-section.folders { grid-area: folders; display: flex; flex-direction: column;  height: 200px;}
-.dash-section.reminders { grid-area: reminders;  height: 200px;}
-.dash-section.calendar { grid-area: calendar;  height: 250px;}
-.dash-section.notes { grid-area: notes;  height: 250px;}
+.dash-section.links { grid-area: links; }
+.dash-section.folders { grid-area: folders; display: flex; flex-direction: column;  }
+.dash-section.reminders { grid-area: reminders;  }
+.dash-section.calendar { grid-area: calendar; }
+.dash-section.notes { grid-area: notes;  }
 
 .dash-head {
   color: var(--gold);
