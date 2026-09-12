@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deck | New Tab</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="term-window">
+    <div class="term-titlebar">
+      <a class="term-tab" href="terminal.html">
+        <span class="tab-dot"></span>Deck | New Tab
+      </a>
+      <span class="term-clock" id="term-clock">--:--:-- --</span>
+      <div class="term-controls">
+        <button class="ctrl" id="ctrl-min" aria-label="Minimize">&#x2013;</button>
+        <button class="ctrl" id="ctrl-max" aria-label="Maximize">&#x25A1;</button>
+        <button class="ctrl close" id="ctrl-close" aria-label="Close">&#x2715;</button>
+      </div>
+    </div>
+
+    <div class="term-body">
+      <div class="dashboard-view" id="dashboardView">
+        <div class="dash-header">
+          <div class="dash-avatar" id="dash-avatar">?</div>
+          <div class="dash-header-text">
+            <div class="dash-greeting">Welcome back, <span id="dash-username">guest</span></div>
+            <div class="dash-date" id="dash-date"></div>
+          </div>
+
+          <div class="dash-search" id="dashSearch" data-mode="google">
+            <button type="button" class="search-toggle" id="searchToggle" aria-label="Switch between Google and YouTube">
+              <span class="search-toggle-track"><span class="search-toggle-thumb"></span></span>
+            </button>
+            <form id="dashSearchForm" class="search-form">
+              <input type="text" id="dashSearchInput" placeholder="Search Google…" autocomplete="off" spellcheck="false" />
+            </form>
+          </div>
+
+          <a class="open-term-btn" href="terminal.html">&gt;_ Terminal</a>
+        </div>
+
+        <div class="dash-stats" id="dash-stats"></div>
+
+        <div class="dash-grid">
+
+          <section class="dash-section links">
+            <div class="dash-head-row">
+              <div class="dash-head">QUICK LINKS</div>
+              <button type="button" class="icon-btn" data-add-link title="Add link">+</button>
+            </div>
+            <div class="link-tiles" id="dash-links-body"></div>
+          </section>
+
+          <section class="dash-section folders">
+            <div class="dash-head-row">
+              <div class="dash-head">FOLDERS</div>
+              <button type="button" class="icon-btn" data-add-folder title="Add folder">+</button>
+            </div>
+            <div class="dash-body" id="dash-folders-body"></div>
+          </section>
+
+          <section class="dash-section reminders">
+            <div class="dash-head-row">
+              <div class="dash-head">REMINDERS</div>
+              <button type="button" class="icon-btn" data-add-reminder title="Add reminder">+</button>
+            </div>
+            <div class="dash-body" id="dash-reminders-body"></div>
+          </section>
+
+          <section class="dash-section calendar">
+            <div class="dash-head" id="dash-calendar-month">CALENDAR</div>
+            <div id="dash-calendar-body"></div>
+          </section>
+
+          <section class="dash-section notes">
+            <div class="dash-head-row">
+              <div class="dash-head">SAVED NOTES</div>
+              <button type="button" class="icon-btn" data-add-note title="Add note">+</button>
+            </div>
+            <div class="dash-body" id="dash-notes-body"></div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="formDialog" class="form-dialog">
+    <form id="formDialogForm">
+      <h3 id="formDialogTitle">Add</h3>
+      <div id="formDialogFields"></div>
+      <div class="form-actions">
+        <button type="button" id="formDialogCancel">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/persist.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/reminders.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/dash-app.js"></script>
+</body>
+</html>

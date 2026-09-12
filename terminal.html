@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deck | Terminal</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="term-window">
+    <div class="term-titlebar">
+      <a class="term-tab" href="index.html">
+        <span class="tab-dot"></span>Dashboard
+      </a>
+      <span class="term-clock" id="term-clock">--:--:-- --</span>
+      <div class="term-controls">
+        <button class="ctrl" id="ctrl-min" aria-label="Minimize">&#x2013;</button>
+        <button class="ctrl" id="ctrl-max" aria-label="Maximize">&#x25A1;</button>
+        <button class="ctrl close" id="ctrl-close" aria-label="Close">&#x2715;</button>
+      </div>
+    </div>
+
+    <div class="term-body">
+      <div class="terminal-view">
+        <div class="term-output" id="term-output"></div>
+        <div class="term-inputline">
+          <span class="prompt" id="term-prompt">PS C:\Users\guest\Dashboard&gt;</span>
+          <input id="term-input" autocomplete="off" spellcheck="false" autocapitalize="off" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/persist.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/reminders.js"></script>
+  <script src="js/commands.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/term-app.js"></script>
+</body>
+</html>
