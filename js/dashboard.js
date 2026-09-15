@@ -216,6 +216,75 @@ function initFormDialog() {
   });
 }
 
+// Color customization — presets plus per-swatch <input type="color"> pickers,
+// all from theme.js. Previews live as you drag a picker; only "Apply" saves
+// it, and canceling (Escape or the backdrop) reverts to what was there
+// when the dialog opened.
+function initThemeDialog() {
+  const dialog = document.getElementById("themeDialog");
+  const btn = document.getElementById("themeBtn");
+  if (!dialog || !btn) return;
+
+  const presetsEl = document.getElementById("themePresets");
+  presetsEl.innerHTML = Object.keys(THEME_PRESETS)
+    .map((name) => `<button type="button" class="theme-preset-btn" data-preset="${escapeAttr(name)}">${escapeHtml(name)}</button>`)
+    .join("");
+
+  function syncInputs(theme) {
+    dialog.querySelectorAll("[data-theme-var]").forEach((input) => {
+      input.value = theme[input.getAttribute("data-theme-var")];
+    });
+  }
+
+  let beforeOpen = null;
+
+  btn.addEventListener("click", () => {
+    beforeOpen = currentTheme();
+    syncInputs(beforeOpen);
+    dialog.showModal();
+  });
+
+  dialog.querySelectorAll("[data-theme-var]").forEach((input) => {
+    input.addEventListener("input", () => {
+      document.documentElement.style.setProperty(input.getAttribute("data-theme-var"), input.value);
+    });
+  });
+
+  presetsEl.addEventListener("click", (e) => {
+    const presetBtn = e.target.closest("[data-preset]");
+    if (!presetBtn) return;
+    const theme = THEME_PRESETS[presetBtn.getAttribute("data-preset")];
+    applyTheme(theme);
+    syncInputs(theme);
+  });
+
+  document.getElementById("themeReset").addEventListener("click", () => {
+    applyTheme(DEFAULT_THEME);
+    syncInputs(DEFAULT_THEME);
+  });
+
+  document.getElementById("themeForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    saveTheme(currentTheme());
+    dialog.close();
+  });
+
+  // Native <dialog> fires "cancel" specifically for an Escape-triggered
+  // close, which is exactly the "didn't mean to keep this" case.
+  dialog.addEventListener("cancel", () => {
+    if (beforeOpen) applyTheme(beforeOpen);
+  });
+
+  dialog.addEventListener("click", (e) => {
+    const r = dialog.getBoundingClientRect();
+    const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+    if (!inside) {
+      if (beforeOpen) applyTheme(beforeOpen);
+      dialog.close();
+    }
+  });
+}
+
 // ============================================================================
 // CRUD actions — one function per button, each just mutates state.data and
 // calls saveState() (which re-renders). Deletes use the native confirm(),
@@ -417,6 +486,7 @@ function wireSearchBar() {
 
 function initDashboardInteractions() {
   initFormDialog();
+  initThemeDialog();
   wireSearchBar();
 
   document.addEventListener("click", (e) => {
