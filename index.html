@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="page-dashboard">
+<body>
 
   <div class="term-window">
     <div class="term-titlebar">
@@ -43,7 +43,6 @@
             </form>
           </div>
 
-          <button type="button" class="open-term-btn" id="themeBtn" title="Customize colors">&#127912;</button>
           <a class="open-term-btn" href="terminal.html">&gt;_ Terminal</a>
         </div>
 
@@ -104,27 +103,11 @@
     </form>
   </dialog>
 
-  <dialog id="themeDialog" class="form-dialog">
-    <form id="themeForm">
-      <h3>Customize Colors</h3>
-      <div class="theme-presets" id="themePresets"></div>
-      <label class="swatch-field"><span>Primary</span><input type="color" data-theme-var="--teal" /></label>
-      <label class="swatch-field"><span>Accent</span><input type="color" data-theme-var="--gold" /></label>
-      <label class="swatch-field"><span>Alert</span><input type="color" data-theme-var="--coral" /></label>
-      <label class="swatch-field"><span>Links</span><input type="color" data-theme-var="--blue" /></label>
-      <div class="form-actions">
-        <button type="button" id="themeReset">Reset</button>
-        <button type="submit" class="primary">Apply</button>
-      </div>
-    </form>
-  </dialog>
-
   <script src="js/config.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/persist.js"></script>
   <script src="js/state.js"></script>
   <script src="js/loader.js"></script>
-  <script src="js/theme.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/reminders.js"></script>
   <script src="js/clock.js"></script>

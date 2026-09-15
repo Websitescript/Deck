@@ -71,10 +71,6 @@ button { font-family: inherit; color: inherit; background: none; border: none; }
   transition: max-width 0.15s ease, height 0.15s ease;
 }
 
-body.page-dashboard .term-window {
-  background: linear-gradient(180deg, #0d2557 0%, #071531 32%, #030711 62%, #000000 100%);
-}
-
 body.windowed .term-window {
   width: 100%;
   max-width: 960px;
@@ -410,20 +406,6 @@ body.collapsed .term-body { display: none; }
   min-width: 0;
 }
 
-/* On the gradient dashboard background, frosted-glass cards read better
-   than flat opaque ones — the gradient shows through instead of the
-   cards looking like they're floating on a totally unrelated backdrop. */
-body.page-dashboard .dash-section,
-body.page-dashboard .stat-card,
-body.page-dashboard .link-tile,
-body.page-dashboard .folder-card,
-body.page-dashboard .form-dialog,
-body.page-dashboard .term-titlebar {
-  background: rgba(20, 26, 38, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
 .dash-section.links { grid-area: links; }
 .dash-section.folders { grid-area: folders; display: flex; flex-direction: column;  height: 200px;}
 .dash-section.reminders { grid-area: reminders;  height: 200px;}
@@ -746,48 +728,6 @@ body.page-dashboard .term-titlebar {
   color: #052016;
   border-color: var(--teal);
   font-weight: 600;
-}
-
-/* ---- theme dialog ---------------------------------------------------- */
-
-.theme-presets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
-}
-
-.theme-preset-btn {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  color: var(--text);
-  cursor: pointer;
-  background: var(--term-bg);
-}
-
-.theme-preset-btn:hover { border-color: var(--teal); color: var(--teal); }
-
-.swatch-field {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 12px;
-  font-size: 12.5px;
-  color: var(--muted);
-}
-
-.swatch-field input[type="color"] {
-  width: 42px;
-  height: 30px;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: none;
-  cursor: pointer;
 }
 
 /* ---- toast --------------------------------------------------------------- */
