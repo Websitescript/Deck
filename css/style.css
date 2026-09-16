@@ -756,6 +756,48 @@ body.collapsed .term-body { display: none; }
   transform: translateX(-50%) translateY(0);
 }
 
+/* ---- terminal.html card look (this page only — these class names
+   don't exist in index.html, so nothing here touches the dashboard) ---- */
+
+.terminal-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--term-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px -25px rgba(0, 0, 0, 0.6);
+}
+
+.terminal-card-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--titlebar);
+  border-bottom: 1px solid var(--border);
+}
+
+.terminal-card-title {
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* This was missing entirely before — .term-output's flex:1 had nothing
+   to flex against without display:flex here, so the output area just
+   grew with content instead of scrolling, pushing the input line down
+   (eventually clipped by .term-window's overflow:hidden). This is what
+   actually keeps the input pinned at the bottom now. */
+.terminal-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 .term-output {
   flex: 1;
   overflow-y: auto;
